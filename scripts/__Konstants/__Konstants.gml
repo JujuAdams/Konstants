@@ -12,8 +12,6 @@
 // Publication date of the Konstants library.
 #macro KONSTANTS_DATE  "2026-06-25"
 
-show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTANTS_VERSION}, {KONSTANTS_DATE}");
-
 // Whether the game is running from the IDE or not. Helpful for toggling off features that should
 // never be available in production builds.
 #macro K_RUNNING_FROM_IDE  (GM_build_type == "run")
@@ -49,12 +47,18 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 // Whether the game is running using XBOX Series X or Series S export target.
 #macro K_XBOX_SERIES_ANY  (os_type == os_xboxseriesxs)
 
-// Whether the game is running on an XBOX Series X console specifically.
+// Whether the game is running on an XBOX Series X console specifically. This is helpful to adjust
+// graphics options to reflect the greater performance of the Series X hardware versus the Series S
+// hardware.
+// 
 // N.B. This macro will not be resolved at compile time and should not be used in areas of your
 //      codebase that are performance-sensitive.
 #macro K_XBOX_SERIES_X  ((os_type == os_xboxseriesxs) && (not __KonstantsGetXboxSeriesS()))
 
-// Whether the game is running using XBOX Series X or Series S export target.
+// Whether the game is running on an XBOX Series S console specifically. This is helpful to adjust
+// graphics options to reflect the lower performance of the Series S hardware versus the Series X
+// hardware.
+// 
 // N.B. This macro will not be resolved at compile time and should not be used in areas of your
 //      codebase that are performance-sensitive.
 #macro K_XBOX_SERIES_S  ((os_type == os_xboxseriesxs) && __KonstantsGetXboxSeriesS())
@@ -75,8 +79,9 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 #macro K_GXGAMES  (os_type == os_gxgames)
 
 // Whether the game is running using the HTML5 export target.
-// N.B. This macro will not be resolved at compile time and should not be used in areas of your
-//      codebase that are performance-sensitive.
+// 
+// N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
+//      of your codebase that are performance-sensitive.
 #macro K_HTML5  ((not K_GXGAMES) && K_WEB)
 
 ///////
@@ -86,7 +91,8 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 // Whether game is running on Windows, macOS, or Linux.
 #macro K_DESKTOP  (K_WINDOWS || K_MACOS || K_LINUX)
 
-// Whether the game is running on Android.
+// Whether the game is running on iOS or Android. This constant will be `false` when running using
+// the tvOS export target.
 #macro K_MOBILE  (K_IOS || K_ANDROID)
 
 // Whether the game is running on macOS, iOS, or tvOS. This macro may be of use when setting up
@@ -100,17 +106,17 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 #macro K_PSX  (K_PS3 || K_PS4 || K_PS5)
 
 // Whether the game is running on Nintendo Switch 1 or 2.
-#macro K_SWITCH_X  ((os_type == os_switch) || (os_type == os_switch2))
+#macro K_SWITCH_X  (K_SWITCH || K_SWITCH_2)
 
 // Whether the game is using DirectX for rendering. This is only the case when running on Windows
 // not through a browser and when running on an XBOX console.
 // 
 // N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
 //      of your codebase that are performance-sensitive.
-#macro K_DIRECTX  ((K_WINDOWS || K_XBOX_SERIES_ANY) && (not K_WEB))
+#macro K_DIRECTX  ((K_WINDOWS || K_XBOX) && (not K_WEB))
 
-// Whether the game is using OpenGL for rendering. This is every other platform, and when running
-// through the browser.
+// Whether the game is using OpenGL for rendering. This is every platform other than Windows and
+// XBOX, and when running through the browser on any platform.
 // 
 // N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
 //      of your codebase that are performance-sensitive.
@@ -132,11 +138,13 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 
 // Whether the game is running on a desktop platform and Steamworks is present and has been
 // initialized successfully.
+// 
 // N.B. This macro relies on the name of the Steamworks extension to be exactly "Steamworks".
 //      The official YoYoGames extension uses this name so no user adjustment is expected.
 #macro K_STEAMWORKS  (K_DESKTOP && __KonstantsGetSteamAvailable())
 
 // Whether the game is running on iOS and GameCenter is present in the project.
+// 
 // N.B. This macro relies on the name of the GameCenter extension to be exactly "GameCenter".
 //      The official YoYoGames extension uses this name so no user adjustment is expected.
 #macro K_GAMECENTER  (K_IOS && extension_exists("GameCenter"))
@@ -146,6 +154,7 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 #macro K_PLAY_SERVICES  (K_ANDROID && __KonstantsGetPlayServicesAvailable())
 
 // Whether the game is running on Windows and GDK is present in the project.
+// 
 // N.B. This macro relies on the name of the Windows GDK extension to be exactly "GDKExtension".
 //      The official YoYoGames extension uses this name so no user adjustment is expected.
 #macro K_WINDOWS_GDK  (K_WINDOWS && extension_exists("GDKExtension"))
@@ -157,6 +166,7 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 // Whether the game is running on a desktop platform and Steamworks is present in the project. This
 // macro does *not* consider whether Steamworks initialized successfully. This macro can therefore
 // be used to detect a failure to initialize Steamworks.
+// 
 // N.B. This macro relies on the name of the Steamworks extension to be exactly "Steamworks".
 //      The official YoYoGames extension uses this name so no user adjustment is expected.
 #macro K_STEAMWORKS_PRESENT  (K_DESKTOP && extension_exists("Steamworks"))
@@ -164,6 +174,7 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 // Whether the game is running on Android and Google Play Services is present in the project. This
 // macro does *not* consider whether Google Play Services initialized successfully. This macro can
 // therefore be used to detect a failure to initialize Google Play Services.
+// 
 // N.B. This macro relies on the name of the Windows GDK extension to be exactly "GDKExtension".
 //      The official YoYoGames extension uses this name so no user adjustment is expected.
 #macro K_PLAY_SERVICES_PRESENT  (K_ANDROID && extension_exists("GooglePlayServices"))
@@ -177,3 +188,5 @@ show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTA
 
 // Whether the game is running using the XBOX One export target.
 #macro K_XBOX_ONE  (os_type == os_xboxone)
+
+show_debug_message($"Welcome to Konstants by Juju Adams! This is version {KONSTANTS_VERSION}, {KONSTANTS_DATE}");
