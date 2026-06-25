@@ -2,6 +2,8 @@
 /// of these macros resolve at compile time and as such can be used for performance-sensitive
 /// branching.
 
+
+
 ///////
 // Miscellaneous
 ///////
@@ -15,6 +17,55 @@
 // Whether the game is running from the IDE or not. Helpful for toggling off features that should
 // never be available in production builds.
 #macro K_RUNNING_FROM_IDE  (GM_build_type == "run")
+
+
+
+///////
+// Collective
+///////
+
+// Whether game is running on Windows, macOS, or Linux.
+#macro K_DESKTOP  (K_WINDOWS || K_MACOS || K_LINUX)
+
+// Whether the game is running on iOS or Android. This constant will be `false` when running using
+// the tvOS export target.
+#macro K_MOBILE  (K_IOS || K_ANDROID)
+
+// Whether the game is running on macOS, iOS, or tvOS. This macro may be of use when setting up
+// in-app purchases using Apple's SDK.
+#macro K_APPLE  (K_IOS || K_TVOS || K_MACOS)
+
+// Whether the game is running on any type of XBOX.
+#macro K_XBOX  (K_XBOX_ONE || K_XBOX_SERIES_ANY)
+
+// Whether the game is running on Sony PlayStation 3, 4, or 5.
+#macro K_PSX  (K_PS3 || K_PS4 || K_PS5)
+
+// Whether the game is running on Nintendo Switch 1 or 2.
+#macro K_SWITCH_X  (K_SWITCH || K_SWITCH_2)
+
+// Whether the game is using DirectX for rendering. This is only the case when running on Windows
+// not through a browser and when running on an XBOX console.
+// 
+// N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
+//      of your codebase that are performance-sensitive.
+#macro K_DIRECTX  ((K_WINDOWS || K_XBOX) && (not K_WEB))
+
+// Whether the game is using OpenGL for rendering. This is every platform other than Windows and
+// XBOX, and when running through the browser on any platform.
+// 
+// N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
+//      of your codebase that are performance-sensitive.
+#macro K_OPENGL  (not K_DIRECTX)
+
+// Whether the game is running through a browser. This macro will return `true` when running using
+// the HTML5 export target or the GX.Games export target.
+// 
+// N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
+//      of your codebase that are performance-sensitive.
+#macro K_WEB  (K_GXGAMES || (os_browser != browser_not_a_browser))
+
+
 
 ///////
 // Platforms
@@ -84,50 +135,7 @@
 //      of your codebase that are performance-sensitive.
 #macro K_HTML5  ((not K_GXGAMES) && K_WEB)
 
-///////
-// Collective
-///////
 
-// Whether game is running on Windows, macOS, or Linux.
-#macro K_DESKTOP  (K_WINDOWS || K_MACOS || K_LINUX)
-
-// Whether the game is running on iOS or Android. This constant will be `false` when running using
-// the tvOS export target.
-#macro K_MOBILE  (K_IOS || K_ANDROID)
-
-// Whether the game is running on macOS, iOS, or tvOS. This macro may be of use when setting up
-// in-app purchases using Apple's SDK.
-#macro K_APPLE  (K_IOS || K_TVOS || K_MACOS)
-
-// Whether the game is running on any type of XBOX.
-#macro K_XBOX  (K_XBOX_ONE || K_XBOX_SERIES_ANY)
-
-// Whether the game is running on Sony PlayStation 3, 4, or 5.
-#macro K_PSX  (K_PS3 || K_PS4 || K_PS5)
-
-// Whether the game is running on Nintendo Switch 1 or 2.
-#macro K_SWITCH_X  (K_SWITCH || K_SWITCH_2)
-
-// Whether the game is using DirectX for rendering. This is only the case when running on Windows
-// not through a browser and when running on an XBOX console.
-// 
-// N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
-//      of your codebase that are performance-sensitive.
-#macro K_DIRECTX  ((K_WINDOWS || K_XBOX) && (not K_WEB))
-
-// Whether the game is using OpenGL for rendering. This is every platform other than Windows and
-// XBOX, and when running through the browser on any platform.
-// 
-// N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
-//      of your codebase that are performance-sensitive.
-#macro K_OPENGL  (not K_DIRECTX)
-
-// Whether the game is running through a browser. This macro will return `true` when running using
-// the HTML5 export target or the GX.Games export target.
-// 
-// N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
-//      of your codebase that are performance-sensitive.
-#macro K_WEB  (K_GXGAMES || (os_browser != browser_not_a_browser))
 
 ///////
 // SDKs
@@ -178,6 +186,8 @@
 // N.B. This macro relies on the name of the Windows GDK extension to be exactly "GDKExtension".
 //      The official YoYoGames extension uses this name so no user adjustment is expected.
 #macro K_PLAY_SERVICES_PRESENT  (K_ANDROID && extension_exists("GooglePlayServices"))
+
+
 
 ///////
 // Deprecated
