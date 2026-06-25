@@ -16,3 +16,10 @@ Simple collection of macros (constants) that cover various common use cases. Mos
 |`K_RUNNING_FROM_IDE`|Game is running from the GameMaker IDE            |
 |`K_SWITCH_X`        |Game is running on Switch or Switch 2             |
 |`K_DIRECTX`         |Game is running using DirectX                     |
+
+## Installation
+
+1. Download [.yymps package](https://github.com/JujuAdams/Konstants/releases)
+2. In the GameMaker IDE, click on "Tools" on the menubar and then "Import Local Package"
+3. The "Import resources" window will pop up. Click "Add All" and then "Import" (bottom right)
+4. Use the constants in your project
