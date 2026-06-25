@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__KonstantsGetXboxSeriesS",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__KonstantsGetXboxSeriesS",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Konstants/(System).yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

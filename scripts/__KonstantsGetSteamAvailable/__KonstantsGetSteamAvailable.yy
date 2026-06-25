@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__KonstantsGetSteamAvailable",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__KonstantsGetSteamAvailable",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Konstants/(System).yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

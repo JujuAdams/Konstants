@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"__KonstantsGetPlayServicesAvailable",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"__KonstantsGetPlayServicesAvailable",
+  "parent":{
+    "name":"(System)",
+    "path":"folders/Konstants/(System).yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
