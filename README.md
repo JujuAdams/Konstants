@@ -11,7 +11,7 @@ Simple collection of macros (constants) that cover various common use cases. Mos
 |Constant            |Purpose|
 |--------------------|--------------------------------------------------|
 |`K_WINDOWS`         |Game is running on Microsoft Windows              |
-|`K_DESTOP`          |Game is running on Windows, macOS, or Linux       |
+|`K_DESKTOP`         |Game is running on Windows, macOS, or Linux       |
 |`K_STEAMWORKS`      |Steamworks is running and initialized successfully|
 |`K_RUNNING_FROM_IDE`|Game is running from the GameMaker IDE            |
 |`K_SWITCH_X`        |Game is running on Switch or Switch 2             |
