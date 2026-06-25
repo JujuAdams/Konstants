@@ -17,6 +17,8 @@ Simple collection of macros (constants) that cover various common use cases. Mos
 |`K_SWITCH_X`        |Game is running on Switch or Switch 2             |
 |`K_DIRECTX`         |Game is running using DirectX                     |
 
+&nbsp;
+
 ## Installation
 
 1. Download [.yymps package](https://github.com/JujuAdams/Konstants/releases)
