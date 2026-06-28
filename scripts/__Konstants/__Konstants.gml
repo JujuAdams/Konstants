@@ -58,6 +58,13 @@
 //      of your codebase that are performance-sensitive.
 #macro K_OPENGL  (not K_DIRECTX)
 
+// Whether the game is running on a platform with normative matrix behaviour. "Normative" for the
+// purposes of this macro means a native Windows export.
+// 
+// N.B. This macro will not necessarily be resolved at compile time and should not be used in areas
+//      of your codebase that are performance-sensitive.
+#macro K_MATRIX_NORMATIVE  ((os_type == os_xboxone) || (os_type == os_xboxseriesxs) || (os_type == os_ps5) || ((os_type == os_windows) && (os_browser == browser_not_a_browser)))
+
 // Whether the game is running through a browser. This macro will return `true` when running using
 // the HTML5 export target or the GX.Games export target.
 // 
